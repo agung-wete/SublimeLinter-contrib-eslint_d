@@ -40,7 +40,8 @@ class Eslint_d(NodeLinter):
     )
     line_col_base = (1, 1)
     selectors = {
-        'html': 'source.js.embedded.html'
+        'html': 'source.js.embedded.html',
+        'vue': 'source.js.embedded.html'
     }
     
     def find_errors(self, output):
