@@ -41,8 +41,7 @@ class Eslint_d(NodeLinter):
     selectors = {
         'html': 'source.js.embedded.html'
     }
-    config_file = ('--config', '.eslintrc', '~')
-
+    
     def find_errors(self, output):
         """
         Parse errors from linter's output.
