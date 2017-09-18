@@ -61,7 +61,23 @@ class Eslint_d(NodeLinter):
             return [(match, 0, None, "Error", "", msg, None)]
 
         return super().find_errors(output)
+    
+    def split_match(self, match):
+        """
+        Extract and return values from match.
 
+        We override this method to silent warning by .eslintignore settings.
+        """
+
+        v1message = 'File ignored because of your .eslintignore file. Use --no-ignore to override.'
+        v2message = 'File ignored because of a matching ignore pattern. Use --no-ignore to override.'
+
+        match, line, col, error, warning, message, near = super().split_match(match)
+        if message and (message == v1message or message == v2message):
+            return match, None, None, None, None, '', None
+
+        return match, line, col, error, warning, message, near
+    
     def communicate(self, cmd, code=None):
         """Run an external executable using stdin to pass code and return its output."""
 
